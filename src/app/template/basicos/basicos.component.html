@@ -1,0 +1,97 @@
+<h2>Template: <small>Básicos</small></h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="save()" #myForm="ngForm" autocomplete="off">
+
+      <!-- Campo de Producto-->
+      <div class="mb-3 row">
+
+        <label class="col-sm-3 col-form-label">Producto</label>
+
+        <div class="col-sm-9">
+
+          <input
+          type="text"
+          class="form-control"
+          placeholder="Nombre del producto"
+            [ngModel]="initForm.producto"
+            name="producto"
+            required
+            minlength="3">
+
+          <span class="form-text text-danger"
+          *ngIf="nombreValido()">
+            Debe tener un mínimo de 3 valores
+          </span>
+
+        </div>
+      </div>
+
+      <!-- Campo de Precio-Producto-->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            [ngModel]="initForm.precio"
+            name="precio"
+            placeholder="Precio del producto"
+            required
+            min="0"
+            onkeydown="return event.keyCode !== 69"
+          />
+          <span class="form-text text-danger"
+          *ngIf="precioValido()">
+            El precio debe ser igual o mayor que 0
+          </span>
+        </div>
+      </div>
+
+      <!-- Campo de Existencias-Producto-->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            [ngModel]="initForm.existencias"
+            name="existencias"
+            placeholder="Existencias del producto"
+            onkeydown="return event.keyCode !== 69"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end" [disabled]="myForm.invalid" >  
+            Guardar
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<div class="row">
+    <div class="col">
+            <span> Valid </span>
+            <pre>{{ myForm.valid }}</pre>
+
+            <span> Pristine </span>
+            <pre>{{ myForm.pristine }}</pre>
+            
+            <span> Touched </span>
+            <pre>{{ myForm.touched }}</pre>
+            
+            <span> Valor </span>
+            <pre>{{ myForm.value | json }}</pre>
+    </div>
+</div>
+
+
+
